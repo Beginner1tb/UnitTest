@@ -11,5 +11,10 @@ namespace UnitTest1.Library.Implement
         {
             return param1 + param2;
         }
+
+        public double AddDouble(double param1,double param2)
+        {
+            return param1 + param2;
+        }
     }
 }
