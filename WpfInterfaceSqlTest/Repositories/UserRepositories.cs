@@ -33,7 +33,12 @@ namespace WpfInterfaceSqlTest.Repositories
 
         public void DeleteUser(User user)
         {
-            throw new NotImplementedException();
+            var conn = new NpgsqlConnection(_connectionString);
+            conn.Open();
+            var query= "delete from users where user_name=@Username";
+            using var cmd = new NpgsqlCommand(query,conn);
+            cmd.Parameters.AddWithValue("@Username", user.Username);
+            cmd.ExecuteNonQuery();
         }
 
         public IEnumerable<User> GetAllUsers()
@@ -77,12 +82,40 @@ namespace WpfInterfaceSqlTest.Repositories
 
         public User GetUserInfo(string username)
         {
-            throw new NotImplementedException();
+            var conn = new NpgsqlConnection(_connectionString);
+            conn.Open();
+            var query = "select id, user_name, role FROM users where user_name=@username";
+            var cmd = new NpgsqlCommand(query, conn);
+            cmd.Parameters.AddWithValue($"@username", username);
+            using var reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                var user = new User()
+                {
+                    Id = reader.GetGuid(0),
+                    Username = reader.GetString(1),
+                    Role = reader.GetInt32(2),
+                    Password = null
+                };
+                return user;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public void UpdateUser(User user)
         {
-            throw new NotImplementedException();
+            var conn = new NpgsqlConnection(_connectionString);
+            conn.Open();
+            var query = "update users set id=@Id, role=@Role,password=@Password where user_name=@Username";
+            using var cmd = new NpgsqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@Id", Guid.NewGuid());
+            cmd.Parameters.AddWithValue("@Role", user.Role);
+            cmd.Parameters.AddWithValue("@Password", user.Password);
+            cmd.Parameters.AddWithValue("@Username", user.Username);
+            cmd.ExecuteNonQuery();
         }
     }
 }
