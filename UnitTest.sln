@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.35229.62
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTest", "UnitTest\UnitTest.csproj", "{B910509A-DC11-489B-AE6A-9F1D2BEF09CE}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfNlogTest1", "WpfNlogTest1\WpfNlogTest1.csproj", "{57D6CB05-3262-4CCD-BBD9-A231610DFB9F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleNlogTest1", "ConsoleNlogTest1\ConsoleNlogTest1.csproj", "{9DCB09EE-560A-40C8-80B5-A90CC698022F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfNlogSqlTest1.Net5", "WpfNlogSqlTest1.Net5\WpfNlogSqlTest1.Net5.csproj", "{268C86CC-A06B-4C9D-9BC2-6AE572BE323C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{9DCB09EE-560A-40C8-80B5-A90CC698022F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DCB09EE-560A-40C8-80B5-A90CC698022F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DCB09EE-560A-40C8-80B5-A90CC698022F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{268C86CC-A06B-4C9D-9BC2-6AE572BE323C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{268C86CC-A06B-4C9D-9BC2-6AE572BE323C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{268C86CC-A06B-4C9D-9BC2-6AE572BE323C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{268C86CC-A06B-4C9D-9BC2-6AE572BE323C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
