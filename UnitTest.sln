@@ -9,7 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTest1.Library", "UnitTe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTest1.Tests", "UnitTest1.Tests\UnitTest1.Tests.csproj", "{1572C3A0-4CEF-4CC4-98E7-C44F21254C1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfInterfaceSqlTest", "WpfInterfaceSqlTest\WpfInterfaceSqlTest.csproj", "{B6599BA8-BD45-4601-8260-07FAE8883458}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfInterfaceSqlTest", "WpfInterfaceSqlTest\WpfInterfaceSqlTest.csproj", "{B6599BA8-BD45-4601-8260-07FAE8883458}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfNlogTest1", "WpfNlogTest1\WpfNlogTest1.csproj", "{57D6CB05-3262-4CCD-BBD9-A231610DFB9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfNlogTest2", "WpfNlogTest2\WpfNlogTest2.csproj", "{0BF1EC95-46D1-4095-AB9A-D9C8DB2C27D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleNlogTest1", "ConsoleNlogTest1\ConsoleNlogTest1.csproj", "{9DCB09EE-560A-40C8-80B5-A90CC698022F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +39,18 @@ Global
 		{B6599BA8-BD45-4601-8260-07FAE8883458}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6599BA8-BD45-4601-8260-07FAE8883458}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6599BA8-BD45-4601-8260-07FAE8883458}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57D6CB05-3262-4CCD-BBD9-A231610DFB9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57D6CB05-3262-4CCD-BBD9-A231610DFB9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57D6CB05-3262-4CCD-BBD9-A231610DFB9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57D6CB05-3262-4CCD-BBD9-A231610DFB9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BF1EC95-46D1-4095-AB9A-D9C8DB2C27D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BF1EC95-46D1-4095-AB9A-D9C8DB2C27D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BF1EC95-46D1-4095-AB9A-D9C8DB2C27D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BF1EC95-46D1-4095-AB9A-D9C8DB2C27D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DCB09EE-560A-40C8-80B5-A90CC698022F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DCB09EE-560A-40C8-80B5-A90CC698022F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DCB09EE-560A-40C8-80B5-A90CC698022F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DCB09EE-560A-40C8-80B5-A90CC698022F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
