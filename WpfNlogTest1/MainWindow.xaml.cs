@@ -26,17 +26,17 @@ namespace WpfNlogTest1
     {
         private readonly NlogServices _nlogServices;
         private static Logger _logger = LogManager.GetCurrentClassLogger();
-        public MainWindow()
+        public MainWindow(NlogServices nlogServices)
         {
             InitializeComponent();
            
-            //_nlogServices = nlogServices;
+            _nlogServices = nlogServices;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //_nlogServices.LogInfo("123454");
-            _logger.Info("111111");
+            _nlogServices.LogInfo("123454");
+            //_logger.Info("111111");
         }
     }
 }

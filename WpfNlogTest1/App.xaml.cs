@@ -19,12 +19,12 @@ namespace WpfNlogTest1
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            //var userRepositories = new UserRepositories();
-            //var nlogServices = new NlogServices(userRepositories);
-            //var mainWindow = new MainWindow(nlogServices);
+            var userRepositories = new UserRepositories();
+            var nlogServices = new NlogServices(userRepositories);
+            var mainWindow = new MainWindow(nlogServices);
 
 
-            //mainWindow.Show();
+            mainWindow.Show();
         }
     }
 }
