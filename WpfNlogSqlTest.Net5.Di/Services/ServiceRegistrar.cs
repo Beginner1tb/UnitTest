@@ -14,14 +14,14 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace WpfNlogSqlTest.Net5.Di.Services
 {
-    public static class ServiceRegistrer
+    public static class ServiceRegistrar
     {
         public static void RegisterServices(IServiceCollection services,IConfiguration configuration)
         {
             services.AddSingleton<INlogRepositories, NlogRepositories>();
 
             var connectionString = configuration["Postgresql:connectionString"];
-            services.AddSingleton<ISqlRepositories>(provider => new SqlRepositories(connectionString));
+            services.AddScoped<ISqlRepositories>(provider => new SqlRepositories(connectionString));
         }
 
         //public static void RegisterTestServices(IServiceCollection services)

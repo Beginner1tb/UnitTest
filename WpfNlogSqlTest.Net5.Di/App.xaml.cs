@@ -45,11 +45,13 @@ namespace WpfNlogSqlTest.Net5.Di
 
 
             var serviceCollection = new ServiceCollection();
+            
+            
             ConfigureServices(serviceCollection);
-
+            
             ServiceProvider = serviceCollection.BuildServiceProvider();
-
-            var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
+            
+             var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
             mainWindow.Show();
         }
 
@@ -59,7 +61,7 @@ namespace WpfNlogSqlTest.Net5.Di
             services.AddTransient<MainWindow>();
 
             // 通过 ServiceRegistrar 注册所有服务模块，传递 IConfiguration
-            ServiceRegistrer.RegisterServices(services, _configurationSql);
+            ServiceRegistrar.RegisterServices(services, _configurationSql);
         }
     }
 }
