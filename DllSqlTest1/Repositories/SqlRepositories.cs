@@ -1,8 +1,10 @@
-using DllNlogSqlTest1.Interfaces;
-using Npgsql;
-namespace DllNlogSqlTest1
+﻿using Npgsql;
+using System;
+using DllSqlTest1.Interfaces;
+
+namespace DllSqlTest1.Repositories
 {
-    public class SqlRepositories:ISqlRepositories
+    public class SqlRepositories : ISqlRepositories
     {
         private readonly string _connectionString;
         public SqlRepositories(string connectionString)
@@ -12,7 +14,7 @@ namespace DllNlogSqlTest1
         public int GetPriorityNum(string username)
         {
             var priorityNum = 999;
-            using var conn=new NpgsqlConnection(_connectionString);
+            using var conn = new NpgsqlConnection(_connectionString);
             var query = "select role from users where user_name=@username";
             conn.Open();
             using var cmd = new NpgsqlCommand(query, conn);
@@ -22,6 +24,7 @@ namespace DllNlogSqlTest1
             {
                 priorityNum = reader.GetInt32(0);
             }
+
             return priorityNum;
         }
     }

@@ -1,4 +1,4 @@
-namespace DllNlogSqlTest1.Interfaces
+namespace DllNlogTest1.Interfaces
 {
     public interface INlogRepositories
     {

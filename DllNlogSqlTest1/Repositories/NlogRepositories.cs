@@ -1,15 +1,14 @@
-﻿using System;
-using DllNlogSqlTest1.Interfaces;
+﻿using DllNlogTest1.Interfaces;
 using NLog;
 
-namespace DllNlogSqlTest1
+namespace DllNlogTest1.Repositories
 {
     public class NlogRepositories: INlogRepositories
     {
-        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         public void LogInfo(string message)
         {
-            _logger.Info(message);
+            Logger.Info(message);
         }
     }
 }
