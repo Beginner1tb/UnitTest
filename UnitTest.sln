@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfNlogSqlTest.Net5.Di", "W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DllSqlTest1", "DllSqlTest1\DllSqlTest1.csproj", "{BB32DB0F-0CCE-4338-AF7C-5B90E9CB3DD5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfDllTest2", "WpfDllTest2\WpfDllTest2.csproj", "{3D8EFA0F-B8E7-4413-AD01-028AF123F697}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{BB32DB0F-0CCE-4338-AF7C-5B90E9CB3DD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB32DB0F-0CCE-4338-AF7C-5B90E9CB3DD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB32DB0F-0CCE-4338-AF7C-5B90E9CB3DD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D8EFA0F-B8E7-4413-AD01-028AF123F697}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D8EFA0F-B8E7-4413-AD01-028AF123F697}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D8EFA0F-B8E7-4413-AD01-028AF123F697}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D8EFA0F-B8E7-4413-AD01-028AF123F697}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
