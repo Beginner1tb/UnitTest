@@ -4,7 +4,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-
 using DllNlogTest1.Interfaces;
 using DllNlogTest1.Repositories;
 using DllSqlTest1.Interfaces;
@@ -14,13 +13,20 @@ using Prism.Ioc;
 
 namespace PrismNlogSqlTest1.Services
 {
-    public static class ServiceRegistrar
+    public class ServiceRegistrar
     {
-        public static void RegisterServices(IContainerRegistry containerRegistry, IConfiguration configuration)
+        private readonly IConfiguration _configuration;
+
+        public ServiceRegistrar(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
+        public void RegisterServices(IContainerRegistry containerRegistry)
         {
             containerRegistry.Register<INlogRepositories, NlogRepositories>();
 
-            var connectionString = configuration["Postgresql:connectionString"];
+            var connectionString = _configuration["Postgresql:connectionString"];
             containerRegistry.Register<ISqlRepositories>(provider => new SqlRepositories(connectionString));
         }
 

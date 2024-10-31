@@ -27,7 +27,8 @@ namespace PrismNlogSqlTest1
                 .AddJsonFile("./Settings/postgres_settings.json", optional: false, reloadOnChange: true);
             _configuration = builder.Build();
             // 注册服务
-            ServiceRegistrar.RegisterServices(containerRegistry, _configuration);
+            var serviceRegistrar = new ServiceRegistrar(_configuration);
+            serviceRegistrar.RegisterServices(containerRegistry);
         }
 
        

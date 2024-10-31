@@ -34,13 +34,22 @@ namespace PrismNlogSqlTest1.ViewModels
         }
 
         public DelegateCommand NlogCommand { get; private set; }
+        public DelegateCommand SqlCommand { get; private set; }
 
         public MainWindowViewModel(INlogRepositories logRepositories, ISqlRepositories sqlRepositories)
         {
            
             NlogCommand = new DelegateCommand(NlogInfoRecord);
+            SqlCommand=new DelegateCommand(SqlQuery);
             _logRepositories = logRepositories;
             _sqlRepositories = sqlRepositories;
+            Username="u6";  
+        }
+
+        private void SqlQuery()
+        {
+            int priorityNum = _sqlRepositories.GetPriorityNum(Username);
+            _logRepositories.LogInfo($"Priority number for user {Username} is {priorityNum}.");
         }
 
         private void NlogInfoRecord()

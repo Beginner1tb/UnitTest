@@ -9,6 +9,7 @@
 
         </ContentControl>
         <Button Command="{Binding NlogCommand}" Content="NlogTest" HorizontalAlignment="Left" Margin="47,167,0,0" VerticalAlignment="Top" Height="52" Width="108"/>
+        <Button Command="{Binding SqlCommand}" Content="SqlQueryTest" HorizontalAlignment="Left" Margin="47,227,0,0" VerticalAlignment="Top" Height="52" Width="108"/>
         <TextBox HorizontalAlignment="Left" Margin="190,176,0,0" TextWrapping="Wrap" Text="{Binding Logcontent}" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>
