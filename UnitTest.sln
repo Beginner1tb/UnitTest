@@ -21,9 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DllNlogTest1", "DllNlogSqlT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfNlogSqlTest.Net5.Di", "WpfNlogSqlTest.Net5.Di\WpfNlogSqlTest.Net5.Di.csproj", "{0EA8DE19-F481-446F-92D9-B031520ABF89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DllSqlTest1", "DllSqlTest1\DllSqlTest1.csproj", "{BB32DB0F-0CCE-4338-AF7C-5B90E9CB3DD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DllSqlTest1", "DllSqlTest1\DllSqlTest1.csproj", "{BB32DB0F-0CCE-4338-AF7C-5B90E9CB3DD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfDllTest2", "WpfDllTest2\WpfDllTest2.csproj", "{3D8EFA0F-B8E7-4413-AD01-028AF123F697}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfDllTest2", "WpfDllTest2\WpfDllTest2.csproj", "{3D8EFA0F-B8E7-4413-AD01-028AF123F697}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismNlogSqlTest1", "PrismNlogSqlTest1\PrismNlogSqlTest1.csproj", "{E217DF98-FE5B-4617-AF9E-15A047A92C18}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{3D8EFA0F-B8E7-4413-AD01-028AF123F697}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D8EFA0F-B8E7-4413-AD01-028AF123F697}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D8EFA0F-B8E7-4413-AD01-028AF123F697}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E217DF98-FE5B-4617-AF9E-15A047A92C18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E217DF98-FE5B-4617-AF9E-15A047A92C18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E217DF98-FE5B-4617-AF9E-15A047A92C18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E217DF98-FE5B-4617-AF9E-15A047A92C18}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

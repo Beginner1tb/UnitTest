@@ -43,6 +43,9 @@ string title = _configuration["应用程序设置1111:标题"];
 ③ json文件只要用UTF-8编码就支持中文，键名和键值都可以是中文；
 
 ④ 注意最基本的方法是`` _configuration["应用程序设置1111:标题"];``，所以要明确键名的层次；
+### 3. 注意读取文件时需要增加的nuget包
+1. ``SetBasePath(Directory.GetCurrentDirectory())``方法，需要增加``Microsoft.Extensions.Configuration.FileExtension``包
+2. ``AddJsonFile("./Settings/postgres_settings.json", optional: false, reloadOnChange: true)``需要增加```Microsoft.Extensions.Configuration.Json``包
 
 ## 二、Services服务类的使用
 ### 1. 注册服务
@@ -100,4 +103,5 @@ var mainWindow = Services.GetRequiredService<MainWindow>();
 public MainWindow(INlogRepositories nlogRepositories, ISqlRepositories sqlRepositories)
 ```
 此时，相关初始化已经在app.xaml.cs和Services/ServiceRegistrar.cs中完成
-
+## 三、``ServiceCollection``的来源
+这里的``ServiceCollection``的来源库是``Microsoft.Extensions.DependencyInjection``，一定不是``Microsoft.Extensions.DependencyInjection.Abstraction``,记得手动加nuget包，两个包在某些地方是通用的
