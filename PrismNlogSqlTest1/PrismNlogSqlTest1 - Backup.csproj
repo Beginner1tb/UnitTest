@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
   <ItemGroup>
@@ -14,7 +14,12 @@
     <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PrismNlogSqlTest1.Core1\PrismNlogSqlTest1.Core1.csproj" />
+    <Reference Include="DllNlogTest1">
+      <HintPath>Dlls\DllNlogTest1.dll</HintPath>
+    </Reference>
+    <Reference Include="DllSqlTest1">
+      <HintPath>Dlls\DllSqlTest1.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Update="nlog.config">

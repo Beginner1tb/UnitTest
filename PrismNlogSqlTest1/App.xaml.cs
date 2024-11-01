@@ -4,7 +4,7 @@ using PrismNlogSqlTest1.Views;
 using System.Windows;
 using Microsoft.Extensions.Configuration;
 using Prism.DryIoc;
-using PrismNlogSqlTest1.Services;
+using PrismNlogSqlTest1.Core1;
 
 namespace PrismNlogSqlTest1
 {
@@ -27,7 +27,7 @@ namespace PrismNlogSqlTest1
                 .AddJsonFile("./Settings/postgres_settings.json", optional: false, reloadOnChange: true);
             _configuration = builder.Build();
             // 注册服务
-            var serviceRegistrar = new ServiceRegistrar(_configuration);
+            var serviceRegistrar = new SerivcesClass(_configuration);
             serviceRegistrar.RegisterServices(containerRegistry);
         }
 
