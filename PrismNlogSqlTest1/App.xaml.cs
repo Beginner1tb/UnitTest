@@ -4,14 +4,14 @@ using PrismNlogSqlTest1.Views;
 using System.Windows;
 using Microsoft.Extensions.Configuration;
 using Prism.DryIoc;
-using PrismNlogSqlTest1.Core1;
+using PrismNlogSqlTest1.Services1;
 
 namespace PrismNlogSqlTest1
 {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App:PrismApplication
+    public partial class App : PrismApplication
     {
         private IConfiguration _configuration;
         protected override Window CreateShell()
@@ -27,10 +27,10 @@ namespace PrismNlogSqlTest1
                 .AddJsonFile("./Settings/postgres_settings.json", optional: false, reloadOnChange: true);
             _configuration = builder.Build();
             // 注册服务
-            var serviceRegistrar = new SerivcesClass(_configuration);
+            var serviceRegistrar = new ServicesClass(_configuration);
             serviceRegistrar.RegisterServices(containerRegistry);
         }
 
-       
+
     }
 }

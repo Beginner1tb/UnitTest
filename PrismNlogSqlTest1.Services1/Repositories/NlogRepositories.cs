@@ -1,8 +1,8 @@
 ﻿
 using NLog;
-using PrismNlogSqlTest1.Core1.Interfaces;
+using PrismNlogSqlTest1.Services1.Interfaces;
 
-namespace PrismNlogSqlTest1.Core1.Repositories
+namespace PrismNlogSqlTest1.Services1.Repositories
 {
     public class NlogRepositories: INlogRepositories
     {

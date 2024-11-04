@@ -14,7 +14,7 @@
     <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PrismNlogSqlTest1.Core1\PrismNlogSqlTest1.Core1.csproj" />
+    <ProjectReference Include="..\PrismNlogSqlTest1.Services1\PrismNlogSqlTest1.Services1.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="nlog.config">

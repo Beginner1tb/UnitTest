@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PrismNlogSqlTest1.Core1.Interfaces
+namespace PrismNlogSqlTest1.Services1.Interfaces
 {
     public interface ISqlRepositories
     {

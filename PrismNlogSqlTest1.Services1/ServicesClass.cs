@@ -1,16 +1,16 @@
-﻿using PrismNlogSqlTest1.Core1.Interfaces;
-using PrismNlogSqlTest1.Core1.Repositories;
+﻿using PrismNlogSqlTest1.Services1.Interfaces;
+using PrismNlogSqlTest1.Services1.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Prism.Ioc;
 
-namespace PrismNlogSqlTest1.Core1
+namespace PrismNlogSqlTest1.Services1
 {
-    public class SerivcesClass
+    public class ServicesClass
     {
         private readonly IConfiguration _configuration;
 
-        public SerivcesClass(IConfiguration configuration)
+        public ServicesClass(IConfiguration configuration)
         {
             _configuration = configuration;
         }

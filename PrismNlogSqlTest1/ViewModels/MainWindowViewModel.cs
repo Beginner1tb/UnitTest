@@ -1,8 +1,8 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
-using PrismNlogSqlTest1.Core1;
+using PrismNlogSqlTest1.Services1;
 using System;
-using PrismNlogSqlTest1.Core1.Interfaces;
+using PrismNlogSqlTest1.Services1.Interfaces;
 
 namespace PrismNlogSqlTest1.ViewModels
 {

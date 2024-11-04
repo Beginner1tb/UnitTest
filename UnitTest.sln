@@ -27,7 +27,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfDllTest2", "WpfDllTest2\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrismNlogSqlTest1", "PrismNlogSqlTest1\PrismNlogSqlTest1.csproj", "{E217DF98-FE5B-4617-AF9E-15A047A92C18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismNlogSqlTest1.Core1", "PrismNlogSqlTest1.Core1\PrismNlogSqlTest1.Core1.csproj", "{4DB902FA-676B-41B6-BC70-DF07F6E71D1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrismNlogSqlTest1.Services1", "PrismNlogSqlTest1.Services1\PrismNlogSqlTest1.Services1.csproj", "{D849922F-E266-480E-ABAA-B1BEE0A6291F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrismNlogSqlTest1.Core1", "PrismNlogSqlTest1.Core1\PrismNlogSqlTest1.Core1.csproj", "{F8539358-4FE2-440C-AA4B-A12F8EA74C68}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PrismNlogSqlTest1.Test1", "PrismNlogSqlTest1.Test1", "{11EF82FF-736F-49E6-A5BF-02A9F15CF30F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismNlogSqlTest1.Nlog.Test1", "PrismNlogSqlTest1.Nlog.Test1\PrismNlogSqlTest1.Nlog.Test1.csproj", "{3F81699B-8C41-4B07-AEBB-64D8D99E60F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,13 +89,24 @@ Global
 		{E217DF98-FE5B-4617-AF9E-15A047A92C18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E217DF98-FE5B-4617-AF9E-15A047A92C18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E217DF98-FE5B-4617-AF9E-15A047A92C18}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4DB902FA-676B-41B6-BC70-DF07F6E71D1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4DB902FA-676B-41B6-BC70-DF07F6E71D1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4DB902FA-676B-41B6-BC70-DF07F6E71D1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4DB902FA-676B-41B6-BC70-DF07F6E71D1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D849922F-E266-480E-ABAA-B1BEE0A6291F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D849922F-E266-480E-ABAA-B1BEE0A6291F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D849922F-E266-480E-ABAA-B1BEE0A6291F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D849922F-E266-480E-ABAA-B1BEE0A6291F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8539358-4FE2-440C-AA4B-A12F8EA74C68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8539358-4FE2-440C-AA4B-A12F8EA74C68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8539358-4FE2-440C-AA4B-A12F8EA74C68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8539358-4FE2-440C-AA4B-A12F8EA74C68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F81699B-8C41-4B07-AEBB-64D8D99E60F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F81699B-8C41-4B07-AEBB-64D8D99E60F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F81699B-8C41-4B07-AEBB-64D8D99E60F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F81699B-8C41-4B07-AEBB-64D8D99E60F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3F81699B-8C41-4B07-AEBB-64D8D99E60F8} = {11EF82FF-736F-49E6-A5BF-02A9F15CF30F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AF36992F-09B1-4D3E-8A41-9020C632B21E}
