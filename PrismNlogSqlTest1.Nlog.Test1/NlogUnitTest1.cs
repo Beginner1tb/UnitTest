@@ -4,114 +4,62 @@ using PrismNlogSqlTest1.Services1.Repositories;
 using Microsoft.Extensions.Configuration;
 using Moq;
 using Prism.Ioc;
+
+
+using Microsoft.Extensions.DependencyInjection;
+
+
 namespace PrismNlogSqlTest1.Nlog.Test1
 {
     public class NlogUnitTest1
     {
-
-
-        [Fact]
-        public void RegisterServices_ShouldRegisterINlogRepositories()
+        private ServicesClass _servicesClass;
+        private Mock<IContainerRegistry> _containerRegistryMock;
+        public NlogUnitTest1()
         {
-            //var containerRegistryMock = new Mock<IContainerRegistry>();
+            // 创建一个 Mock 的 IContainerRegistry 实例
+            _containerRegistryMock = new Mock<IContainerRegistry>();
 
-            //var configurationMock=new Mock<IConfiguration>();
-
-            //var servicesClass=new ServicesClass(configurationMock.Object);
-
-            //servicesClass.RegisterServices(containerRegistryMock.Object);
-
-            //containerRegistryMock.Verify(cr=>cr.Register<INlogRepositories,NlogRepositories>(),Times.Once);
-
-            // 创建 TestContainerRegistry 实例
-            var containerRegistry = new TestContainerRegistry();
-
-            // 创建 IConfiguration 的 Mock 对象（如有需要）
-            var configurationMock = new Mock<IConfiguration>();
-
-            // 实例化 ServicesClass
-            var servicesClass = new ServicesClass(configurationMock.Object);
-
-            // 调用 RegisterServices 注册方法
-            servicesClass.RegisterServices(containerRegistry);
-
-            // 解析 INlogRepositories，验证是否注册成功
-            var resolvedRepo = containerRegistry.Resolve<INlogRepositories>();
-
-            // 验证解析出的对象是 NlogRepositories 类型
-            Assert.IsType<NlogRepositories>(resolvedRepo);
+            // 初始化 ServicesClass
+            _servicesClass = new ServicesClass(new ConfigurationBuilder().Build());
         }
-    }
-
-
-    public class NlogRepositoriesTests
-    {
-        private readonly Mock<INlogRepositories> _mockNlogRepositories;
-
-        public NlogRepositoriesTests()
-        {
-            _mockNlogRepositories = new Mock<INlogRepositories>();
-        }
-
         [Fact]
-        public void LogInfo_CallsLoggerWithCorrectMessage()
+        public void NlogRepositories_Should_Be_Registered()
         {
-            // Arrange
-            string testMessage = "Test log message";
-
             // Act
-            _mockNlogRepositories.Object.LogInfo(testMessage);
+            _servicesClass.RegisterServices(_containerRegistryMock.Object);
 
             // Assert
-            _mockNlogRepositories.Verify(m => m.LogInfo(testMessage), Times.Once);
+            _containerRegistryMock.Verify(cr => cr.Register(typeof(INlogRepositories), typeof(NlogRepositories)), Times.Once);
         }
     }
 
-
-    public class TestContainerRegistry : IContainerRegistry
+    public class PrismContainerRegistry : IContainerRegistry
     {
-        private readonly Dictionary<Type, Func<object>> _registrations = new Dictionary<Type, Func<object>>();
+        private readonly IServiceCollection _services;
 
-        public void Register<TFrom, TTo>() where TTo : TFrom
+        public PrismContainerRegistry(IServiceCollection services)
         {
-            _registrations[typeof(TFrom)] = () => Activator.CreateInstance(typeof(TTo));
+            _services = services;
         }
 
-        public IContainerRegistry Register<T>(Func<IContainerProvider, object> factoryMethod)
+        public void Register<TFrom, TTo>() where TFrom : class where TTo : class, TFrom
         {
-            _registrations[typeof(T)] = () => factoryMethod(null);
-            return this;
+            _services.AddTransient<TFrom, TTo>();
         }
 
-        public T Resolve<T>()
+        // 实现 IContainerRegistry 其他方法
+        public IContainerRegistry RegisterInstance(Type type, object instance)
         {
-            if (_registrations.ContainsKey(typeof(T)))
-            {
-                return (T)_registrations[typeof(T)]();
-            }
-
-            throw new InvalidOperationException($"Type {typeof(T).Name} not registered.");
+            throw new NotImplementedException();
         }
-
-        // 其他 IContainerRegistry 方法的空实现
-        public IContainerRegistry Register(Type from, Type to) => this;
-        public IContainerRegistry RegisterInstance(Type type, object instance) => this;
-        public IContainerRegistry RegisterInstance<T>(T instance) => this;
-        public IContainerRegistry RegisterSingleton(Type from, Type to) => this;
-        public IContainerRegistry RegisterSingleton<TFrom, TTo>() where TTo : TFrom => this;
-        public IContainerRegistry RegisterSingleton(Type type) => this;
-        public IContainerRegistry RegisterSingleton<T>() => this;
-        public IContainerRegistry Register(Type from, Type to, string name) => this;
-        public IContainerRegistry Register(Type type) => this;
-        public IContainerRegistry Register<T>() => this;
-        public IContainerRegistry Register(Type type, string name) => this;
-        public IContainerRegistry Register<T>(string name) => this;
-        public bool IsRegistered(Type type) => _registrations.ContainsKey(type);
-        public bool IsRegistered(Type type, string name) => false;
-        public bool IsRegistered<T>() => _registrations.ContainsKey(typeof(T));
-        public bool IsRegistered<T>(string name) => false;
 
         public IContainerRegistry RegisterInstance(Type type, object instance, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IContainerRegistry RegisterSingleton(Type from, Type to)
         {
             throw new NotImplementedException();
         }
@@ -132,6 +80,16 @@ namespace PrismNlogSqlTest1.Nlog.Test1
         }
 
         public IContainerRegistry RegisterManySingleton(Type type, params Type[] serviceTypes)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IContainerRegistry Register(Type from, Type to)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IContainerRegistry Register(Type from, Type to, string name)
         {
             throw new NotImplementedException();
         }
@@ -165,5 +123,39 @@ namespace PrismNlogSqlTest1.Nlog.Test1
         {
             throw new NotImplementedException();
         }
+
+        public bool IsRegistered(Type type)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsRegistered(Type type, string name)
+        {
+            throw new NotImplementedException();
+        }
     }
+
+
+
+
+    public class NlogRepositoriesTests
+    {
+        private readonly Mock<INlogRepositories> _mockNlogRepositories = new();
+
+        [Fact]
+        public void LogInfo_CallsLoggerWithCorrectMessage()
+        {
+            // Arrange
+            string testMessage = "Test log message";
+
+            // Act
+            _mockNlogRepositories.Object.LogInfo(testMessage);
+
+            // Assert
+            _mockNlogRepositories.Verify(m => m.LogInfo(testMessage), Times.Once);
+        }
+    }
+
+
+
 }
