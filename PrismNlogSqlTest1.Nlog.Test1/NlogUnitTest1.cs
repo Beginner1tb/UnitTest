@@ -1,3 +1,4 @@
+using System.Data;
 using PrismNlogSqlTest1.Services1.Interfaces;
 using PrismNlogSqlTest1.Services1;
 using PrismNlogSqlTest1.Services1.Repositories;
@@ -7,22 +8,29 @@ using Prism.Ioc;
 
 
 using Microsoft.Extensions.DependencyInjection;
+using Npgsql;
 
 
 namespace PrismNlogSqlTest1.Nlog.Test1
 {
     public class NlogUnitTest1
     {
-        private ServicesClass _servicesClass;
-        private Mock<IContainerRegistry> _containerRegistryMock;
+        //传统构造函数对初始化的写法
+        private readonly ServicesClass _servicesClass;
+        private readonly Mock<IContainerRegistry> _containerRegistryMock;
         public NlogUnitTest1()
         {
             // 创建一个 Mock 的 IContainerRegistry 实例
             _containerRegistryMock = new Mock<IContainerRegistry>();
-
+        
             // 初始化 ServicesClass
             _servicesClass = new ServicesClass(new ConfigurationBuilder().Build());
         }
+                
+        //现代C#9之后的写法
+        //private readonly ServicesClass _servicesClass = new(new ConfigurationBuilder().Build());
+        //private readonly Mock<IContainerRegistry> _containerRegistryMock = new();
+       
         [Fact]
         public void NlogRepositories_Should_Be_Registered()
         {
@@ -33,115 +41,18 @@ namespace PrismNlogSqlTest1.Nlog.Test1
             _containerRegistryMock.Verify(cr => cr.Register(typeof(INlogRepositories), typeof(NlogRepositories)), Times.Once);
         }
     }
-
-    public class PrismContainerRegistry : IContainerRegistry
-    {
-        private readonly IServiceCollection _services;
-
-        public PrismContainerRegistry(IServiceCollection services)
-        {
-            _services = services;
-        }
-
-        public void Register<TFrom, TTo>() where TFrom : class where TTo : class, TFrom
-        {
-            _services.AddTransient<TFrom, TTo>();
-        }
-
-        // 实现 IContainerRegistry 其他方法
-        public IContainerRegistry RegisterInstance(Type type, object instance)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IContainerRegistry RegisterInstance(Type type, object instance, string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IContainerRegistry RegisterSingleton(Type from, Type to)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IContainerRegistry RegisterSingleton(Type from, Type to, string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IContainerRegistry RegisterSingleton(Type type, Func<object> factoryMethod)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IContainerRegistry RegisterSingleton(Type type, Func<IContainerProvider, object> factoryMethod)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IContainerRegistry RegisterManySingleton(Type type, params Type[] serviceTypes)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IContainerRegistry Register(Type from, Type to)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IContainerRegistry Register(Type from, Type to, string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IContainerRegistry Register(Type type, Func<object> factoryMethod)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IContainerRegistry Register(Type type, Func<IContainerProvider, object> factoryMethod)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IContainerRegistry RegisterMany(Type type, params Type[] serviceTypes)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IContainerRegistry RegisterScoped(Type from, Type to)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IContainerRegistry RegisterScoped(Type type, Func<object> factoryMethod)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IContainerRegistry RegisterScoped(Type type, Func<IContainerProvider, object> factoryMethod)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IsRegistered(Type type)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IsRegistered(Type type, string name)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-
-
-
     public class NlogRepositoriesTests
     {
-        private readonly Mock<INlogRepositories> _mockNlogRepositories = new();
-
+        //传统构造函数对初始化的写法
+        private readonly Mock<INlogRepositories> _mockNlogRepositories;
+        public NlogRepositoriesTests()
+        {
+            _mockNlogRepositories = new Mock<INlogRepositories>();
+        }
+        
+        //现代C#9之后的写法
+        //private readonly Mock<INlogRepositories> _mockNlogRepositories = new();
+        
         [Fact]
         public void LogInfo_CallsLoggerWithCorrectMessage()
         {
@@ -156,6 +67,61 @@ namespace PrismNlogSqlTest1.Nlog.Test1
         }
     }
 
+    public class SqlRepositoriesTests
+    {
+        private Mock<IDbCommand> _mockDbCommand;
+        private Mock<IDbConnection> _mockDbConnection;
+        private Mock<IDataReader> _mockReader;
+        private SqlRepositories _sqlRepositories;
+
+        public SqlRepositoriesTests()
+        {
+            _mockDbConnection = new Mock<IDbConnection>();
+            _mockDbCommand = new Mock<IDbCommand>();
+            _mockReader = new Mock<IDataReader>();
+            string connectionString = "Host=localhost;Username=postgres;Password=613;Database=CoinCodeTest2;";
+            _sqlRepositories = new SqlRepositories(connectionString);
+        }
 
 
+        [Fact]
+        public void GetPriorityNum_ReturnsExpectedValue()
+        {
+            // Arrange
+            string username = "u6";
+            int expectedPriorityNum = 0;
+
+            _mockReader.Setup(reader => reader.Read()).Returns(true);
+            _mockReader.Setup(reader => reader.GetInt32(0)).Returns(expectedPriorityNum);
+            _mockDbCommand.Setup(cmd => cmd.ExecuteReader(CommandBehavior.Default)).Returns(_mockReader.Object);
+            _mockDbConnection.Setup(connection => connection.CreateCommand()).Returns(_mockDbCommand.Object);
+
+            // Act
+            int actualPriorityNum = _sqlRepositories.GetPriorityNum(username);
+
+            // Assert
+            Assert.Equal(expectedPriorityNum, actualPriorityNum);
+        }
+
+        [Fact]
+        public void GetPriorityNum_ReturnsDefaultFalseValue()
+        {
+            // Arrange
+            string username = "1111";
+            int expectedPriorityNum = 999;
+
+            _mockReader.Setup(reader => reader.Read()).Returns(false);
+            _mockDbCommand.Setup(command => command.ExecuteReader(It.IsAny<CommandBehavior>())).Returns(_mockReader.Object);
+            _mockDbCommand.Setup(cmd => cmd.Parameters.Add(It.IsAny<IDbDataParameter>())).Verifiable();
+            _mockDbConnection.Setup(conn => conn.CreateCommand()).Returns(_mockDbCommand.Object);
+
+            // Act
+            var actualPriority = _sqlRepositories.GetPriorityNum(username);
+
+            // Assert
+            Assert.Equal(expectedPriorityNum, actualPriority);
+
+        }
+
+    }
 }
