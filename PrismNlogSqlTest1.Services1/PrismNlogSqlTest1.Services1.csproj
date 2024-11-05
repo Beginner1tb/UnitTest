@@ -12,6 +12,7 @@
     <PackageReference Include="NLog" Version="5.3.4" />
     <PackageReference Include="Npgsql" Version="7.0.8" />
     <PackageReference Include="Prism.Core" Version="8.1.97" />
+    <PackageReference Include="Stub.System.Data.SQLite.Core.NetStandard" Version="1.0.119" />
   </ItemGroup>
 
 </Project>

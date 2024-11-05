@@ -80,7 +80,9 @@ namespace PrismNlogSqlTest1.Nlog.Test1
             _mockDbCommand = new Mock<IDbCommand>();
             _mockReader = new Mock<IDataReader>();
             string connectionString = "Host=localhost;Username=postgres;Password=613;Database=CoinCodeTest2;";
-            _sqlRepositories = new SqlRepositories(connectionString);
+            var mockConnectionFactory = new Mock<IDbConnectionFactory>();
+
+            _sqlRepositories = new SqlRepositories(mockConnectionFactory.Object);
         }
 
 

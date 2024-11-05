@@ -1,0 +1,6 @@
+﻿{
+  "Database": {
+    "connectionString": "Host=localhost;Username=postgres;Password=613;Database=CoinCodeTest2;",
+    "Type": "Postgres"
+  }
+}
