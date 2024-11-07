@@ -86,43 +86,188 @@ namespace PrismNlogSqlTest1.Nlog.Test1
         }
 
 
+        //[Fact]
+        //public void GetPriorityNum_ReturnsExpectedValue()
+        //{
+        //    // Arrange
+        //    string username = "u6";
+        //    int expectedPriorityNum = 0;
+
+        //    _mockReader.Setup(reader => reader.Read()).Returns(true);
+        //    _mockReader.Setup(reader => reader.GetInt32(0)).Returns(expectedPriorityNum);
+        //    _mockDbCommand.Setup(cmd => cmd.ExecuteReader(CommandBehavior.Default)).Returns(_mockReader.Object);
+        //    _mockDbConnection.Setup(connection => connection.CreateCommand()).Returns(_mockDbCommand.Object);
+
+        //    // Act
+        //    int actualPriorityNum = _sqlRepositories.GetPriorityNum(username);
+
+        //    // Assert
+        //    Assert.Equal(expectedPriorityNum, actualPriorityNum);
+        //}
+
+        //[Fact]
+        //public void GetPriorityNum_ReturnsDefaultFalseValue()
+        //{
+        //    // Arrange
+        //    string username = "1111";
+        //    int expectedPriorityNum = 999;
+
+        //    _mockReader.Setup(reader => reader.Read()).Returns(false);
+        //    _mockDbCommand.Setup(command => command.ExecuteReader(It.IsAny<CommandBehavior>())).Returns(_mockReader.Object);
+        //    _mockDbCommand.Setup(cmd => cmd.Parameters.Add(It.IsAny<IDbDataParameter>())).Verifiable();
+        //    _mockDbConnection.Setup(conn => conn.CreateCommand()).Returns(_mockDbCommand.Object);
+
+        //    // Act
+        //    var actualPriority = _sqlRepositories.GetPriorityNum(username);
+
+        //    // Assert
+        //    Assert.Equal(expectedPriorityNum, actualPriority);
+
+        //}
+
         [Fact]
-        public void GetPriorityNum_ReturnsExpectedValue()
+        public void GetPriorityNum_ShouldReturnPriorityNum_WhenUserExists()
         {
             // Arrange
-            string username = "u6";
-            int expectedPriorityNum = 0;
+            var expectedPriorityNum = 1;
+            var username = "testuser";
 
-            _mockReader.Setup(reader => reader.Read()).Returns(true);
-            _mockReader.Setup(reader => reader.GetInt32(0)).Returns(expectedPriorityNum);
-            _mockDbCommand.Setup(cmd => cmd.ExecuteReader(CommandBehavior.Default)).Returns(_mockReader.Object);
-            _mockDbConnection.Setup(connection => connection.CreateCommand()).Returns(_mockDbCommand.Object);
+            // Mock IDbConnectionFactory
+            var connectionFactoryMock = new Mock<IDbConnectionFactory>();
+
+            // Mock IDbConnection
+            var connectionMock = new Mock<IDbConnection>();
+            connectionFactoryMock.Setup(f => f.CreateConnection()).Returns(connectionMock.Object);
+
+            // Ensure connection opens when called
+            connectionMock.Setup(conn => conn.Open());
+
+            // Mock IDbCommand
+            var commandMock = new Mock<IDbCommand>();
+            connectionMock.Setup(conn => conn.CreateCommand()).Returns(commandMock.Object);
+
+            // Mock IDbDataParameter and ensure it’s returned correctly from CreateParameter
+            var parameterMock = new Mock<IDbDataParameter>();
+            connectionFactoryMock.Setup(f => f.CreateParameter(It.IsAny<string>(), It.IsAny<object>()))
+                .Returns(parameterMock.Object);
+
+            // Mock IDataReader
+            var readerMock = new Mock<IDataReader>();
+            readerMock.Setup(r => r.Read()).Returns(true); // Simulate data presence
+            readerMock.Setup(r => r.GetInt32(0)).Returns(expectedPriorityNum);
+
+            // Set up command to return the mock reader
+            commandMock.Setup(cmd => cmd.ExecuteReader()).Returns(readerMock.Object);
+
+            // Make sure parameters can be added to the command
+            var parameters = new Mock<IDataParameterCollection>();
+            commandMock.Setup(cmd => cmd.Parameters).Returns(parameters.Object);
+
+            // Instantiate SqlRepositories with the mocked connection factory
+            var sqlRepositories = new SqlRepositories(connectionFactoryMock.Object);
 
             // Act
-            int actualPriorityNum = _sqlRepositories.GetPriorityNum(username);
+            var actualPriorityNum = sqlRepositories.GetPriorityNum(username);
 
             // Assert
             Assert.Equal(expectedPriorityNum, actualPriorityNum);
         }
 
         [Fact]
-        public void GetPriorityNum_ReturnsDefaultFalseValue()
+        public void GetPriorityNum_ShouldReturnDefaultPriority_WhenUserDoesNotExist()
         {
             // Arrange
-            string username = "1111";
-            int expectedPriorityNum = 999;
+            var expectedPriorityNum = 1;
+            var username = "testuser";
 
-            _mockReader.Setup(reader => reader.Read()).Returns(false);
-            _mockDbCommand.Setup(command => command.ExecuteReader(It.IsAny<CommandBehavior>())).Returns(_mockReader.Object);
-            _mockDbCommand.Setup(cmd => cmd.Parameters.Add(It.IsAny<IDbDataParameter>())).Verifiable();
-            _mockDbConnection.Setup(conn => conn.CreateCommand()).Returns(_mockDbCommand.Object);
+            // Mock IDbConnectionFactory
+            var connectionFactoryMock = new Mock<IDbConnectionFactory>();
+
+            // Mock IDbConnection
+            var connectionMock = new Mock<IDbConnection>();
+            connectionFactoryMock.Setup(f => f.CreateConnection()).Returns(connectionMock.Object);
+
+            // Ensure connection opens when called
+            connectionMock.Setup(conn => conn.Open());
+
+            // Mock IDbCommand
+            var commandMock = new Mock<IDbCommand>();
+            connectionMock.Setup(conn => conn.CreateCommand()).Returns(commandMock.Object);
+
+            // Mock IDbDataParameter and ensure it’s returned correctly from CreateParameter
+            var parameterMock = new Mock<IDbDataParameter>();
+            connectionFactoryMock.Setup(f => f.CreateParameter(It.IsAny<string>(), It.IsAny<object>()))
+                .Returns(parameterMock.Object);
+
+            // Mock IDataReader
+            var readerMock = new Mock<IDataReader>();
+            readerMock.Setup(r => r.Read()).Returns(false); // Simulate data presence
+            readerMock.Setup(r => r.GetInt32(0)).Returns(expectedPriorityNum);
+
+            // Set up command to return the mock reader
+            commandMock.Setup(cmd => cmd.ExecuteReader()).Returns(readerMock.Object);
+
+            // Make sure parameters can be added to the command
+            var parameters = new Mock<IDataParameterCollection>();
+            commandMock.Setup(cmd => cmd.Parameters).Returns(parameters.Object);
+
+            // Instantiate SqlRepositories with the mocked connection factory
+            var sqlRepositories = new SqlRepositories(connectionFactoryMock.Object);
 
             // Act
-            var actualPriority = _sqlRepositories.GetPriorityNum(username);
+            var actualPriorityNum = sqlRepositories.GetPriorityNum(username);
 
             // Assert
-            Assert.Equal(expectedPriorityNum, actualPriority);
+            Assert.Equal(expectedPriorityNum, actualPriorityNum);
+        }
 
+        [Fact]
+        public void GetPriorityNum_ShouldCallOpenAndExecuteReader_WhenUserExists()
+        {
+            // Arrange
+            var expectedPriorityNum = 1;
+            var username = "testuser";
+
+            // Mock IDbConnectionFactory
+            var connectionFactoryMock = new Mock<IDbConnectionFactory>();
+
+            // Mock IDbConnection
+            var connectionMock = new Mock<IDbConnection>();
+            connectionFactoryMock.Setup(f => f.CreateConnection()).Returns(connectionMock.Object);
+
+            // Ensure connection opens when called
+            connectionMock.Setup(conn => conn.Open());
+
+            // Mock IDbCommand
+            var commandMock = new Mock<IDbCommand>();
+            connectionMock.Setup(conn => conn.CreateCommand()).Returns(commandMock.Object);
+
+            // Mock IDbDataParameter and ensure it’s returned correctly from CreateParameter
+            var parameterMock = new Mock<IDbDataParameter>();
+            connectionFactoryMock.Setup(f => f.CreateParameter(It.IsAny<string>(), It.IsAny<object>()))
+                .Returns(parameterMock.Object);
+
+            // Mock IDataReader
+            var readerMock = new Mock<IDataReader>();
+            readerMock.Setup(r => r.Read()).Returns(true); // Simulate data presence
+            readerMock.Setup(r => r.GetInt32(0)).Returns(expectedPriorityNum);
+
+            // Set up command to return the mock reader
+            commandMock.Setup(cmd => cmd.ExecuteReader()).Returns(readerMock.Object);
+
+            // Make sure parameters can be added to the command
+            var parameters = new Mock<IDataParameterCollection>();
+            commandMock.Setup(cmd => cmd.Parameters).Returns(parameters.Object);
+
+            // Instantiate SqlRepositories with the mocked connection factory
+            var sqlRepositories = new SqlRepositories(connectionFactoryMock.Object);
+
+            // Act
+            var actualPriorityNum = sqlRepositories.GetPriorityNum(username);
+
+            // Verify: 验证 Open 和 ExecuteReader 方法是否被调用
+            connectionMock.Verify(conn => conn.Open(), Times.Once, "Expected Open() to be called once.");
+            commandMock.Verify(cmd => cmd.ExecuteReader(), Times.Once, "Expected ExecuteReader() to be called once.");
         }
 
     }

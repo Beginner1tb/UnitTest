@@ -32,11 +32,10 @@ namespace PrismNlogSqlTest1.Services1.Repositories
             using var conn= _connectionFactory.CreateConnection();
 
             var query = "select role from users where user_name=@username";
-            if (conn.State!=System.Data.ConnectionState.Open) 
+            if (conn.State != System.Data.ConnectionState.Open)
             {
                 conn.Open();
             }
-
             using var cmd=conn.CreateCommand();
             cmd.CommandText = query;
 

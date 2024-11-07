@@ -25,10 +25,10 @@ namespace PrismNlogSqlTest1.Services1
             var databaseType= _configuration["Database:Type"];
             // 根据数据库类型注册相应的工厂实例
             //这里如果选错，则会在ModelView.AutoWired里报错
-            if (connectionString == null)
-            {
-                throw new ArgumentException("connectionString 为空");
-            }
+            //if (connectionString == null)
+            //{
+            //    throw new ArgumentException("connectionString 为空");
+            //}
             if (databaseType == "Postgres")
             {
                 var postgresFactory = new PostgreSqlConnectionFactory(connectionString);
