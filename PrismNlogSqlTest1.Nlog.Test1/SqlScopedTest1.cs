@@ -10,9 +10,11 @@ using PrismNlogSqlTest1.Services1.Interfaces;
 
 namespace PrismNlogSqlTest1.Nlog.Test1
 {
+    //这里实际上已经进行了某种集成测试
     public class ScopedSqliteTests
     {
         private readonly ServiceProvider _serviceProvider;
+
 
         public ScopedSqliteTests()
         {
@@ -25,6 +27,7 @@ namespace PrismNlogSqlTest1.Nlog.Test1
 
             // 构建服务提供者
             _serviceProvider = services.BuildServiceProvider();
+
         }
 
         [Fact]

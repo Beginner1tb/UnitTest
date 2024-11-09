@@ -45,59 +45,8 @@ namespace PrismNlogSqlTest1.Nlog.Test1
     #endregion
 
     //Sqlite内存数据库测试,实现IDispose接口用于释放资源
-    public class SqliteTest1:IDisposable
+    public class SqliteTest1
     {
-        private  ISqlRepositories _sqlRepositories;
-        private readonly SQLiteConnection _sharedConnection;
-        private IDbConnection _dbConnection;
-        private readonly SQLiteConnectionFactory sqliteFactory;
-
-        public SqliteTest1()
-        {
-            //// 创建并打开一个共享的内存数据库连接
-            //_sharedConnection = new SQLiteConnection("Data Source=:memory:");
-
-            //_sharedConnection.Open();
-
-            //// 创建表
-            //using (var cmd = new SQLiteCommand("CREATE TABLE users (user_name TEXT PRIMARY KEY, role INTEGER)", _sharedConnection))
-            //{
-            //    cmd.ExecuteNonQuery();
-            //}
-
-            //// 插入测试数据
-            //using (var cmd = new SQLiteCommand("INSERT INTO users (user_name, role) VALUES (@user_name, @role)", _sharedConnection))
-            //{
-            //    cmd.Parameters.AddWithValue("@user_name", "testUser");
-            //    cmd.Parameters.AddWithValue("@role", 1);
-            //    cmd.ExecuteNonQuery();
-            //}
-
-
-
-            //_sqlRepositories = new SqlRepositories(_sharedConnection.ConnectionString); // 初始化
-
-            //var connectionString = "Data Source=:memory:"; // SQLite 内存数据库
-            // _dbConnection=new SQLiteConnection(connectionString);
-            // sqliteFactory = new SQLiteConnectionFactory(connectionString);
-
-            ////_sharedConnection = (SQLiteConnection)sqliteFactory.CreateConnection();
-            //_dbConnection.Open();
-
-            //// 创建测试表并插入数据
-            //using (var command = _dbConnection.CreateCommand())
-            //{
-            //    command.CommandText = "CREATE TABLE users (user_name TEXT, role INTEGER);";
-            //    command.ExecuteNonQuery();
-
-            //    command.CommandText = "INSERT INTO users (user_name, role) VALUES ('test_user', 1);";
-            //    command.ExecuteNonQuery();
-            //}
-
-            //_sqlRepositories = new SqlRepositories(sqliteFactory);
-
-        }
-
         public void PrintUsersTableData(SQLiteConnection sqliteConnection)
         {
             using var cmd = new SQLiteCommand("SELECT * FROM users", sqliteConnection);
@@ -160,19 +109,13 @@ namespace PrismNlogSqlTest1.Nlog.Test1
 
         private void InitializeDatabase(IDbConnection connection)
         {
-            using (var command = connection.CreateCommand())
-            {
-                command.CommandText = "CREATE TABLE users (user_name TEXT, role INTEGER);";
-                command.ExecuteNonQuery();
+            using var command = connection.CreateCommand();
+            command.CommandText = "CREATE TABLE users (user_name TEXT, role INTEGER);";
+            command.ExecuteNonQuery();
 
-                command.CommandText = "INSERT INTO users (user_name, role) VALUES ('test_user', 1);";
-                command.ExecuteNonQuery();
-            }
+            command.CommandText = "INSERT INTO users (user_name, role) VALUES ('test_user', 1);";
+            command.ExecuteNonQuery();
         }
 
-        public void Dispose()
-        {
-            _sharedConnection?.Dispose();
-        }
     }
 }
