@@ -40,6 +40,23 @@
             return a + b;
         }
     }
+
+    public class Subtraction:IOperation
+    {
+        public int Calculate(int a, int b)
+        {
+            return a - b;
+        }
+    }
+
+    public class Multiplication:IOperation
+    {
+        public int Calculate(int a, int b)
+        {
+            return a * b;
+        }
+    }
+
     //计算器接口
     public interface ICalculator
     {
@@ -59,15 +76,14 @@
     //工厂接口
     public interface ICalculatorFactory
     {
-        ICalculator CreateCalculator();
+        ICalculator CreateCalculator(IOperation operation);
     }
 
     public class CalculatorFactory : ICalculatorFactory
     {
-        public ICalculator CreateCalculator()
+        public ICalculator CreateCalculator(IOperation operation)
         {
-            var operation=new Addition();
-            return new Calculator(operation);
+           return new Calculator(operation);
         }
     }
 
