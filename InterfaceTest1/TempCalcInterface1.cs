@@ -13,6 +13,14 @@
         }
     }
 
+    public class TempCalcInterface2:ITempCalcInterface1
+    {
+        public int AddValue(int value)
+        {
+            return (value + 2);
+        }
+    }
+
     public class Processor
     {
         private readonly ITempCalcInterface1 _tempCalcInterface1;
